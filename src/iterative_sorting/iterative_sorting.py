@@ -7,20 +7,30 @@ def selection_sort(arr):
         # TO-DO: find next smallest element
         # (hint, can do in 3 loc)
         # Your code here
-
+        for j in range(cur_index + 1, len(arr)):
+            if arr[j] < arr[smallest_index]:
+                smallest_index = j
 
         # TO-DO: swap
-        # Your code here
+        arr[smallest_index], arr[cur_index] = arr[cur_index], arr[smallest_index]
 
     return arr
 
 
 # TO-DO:  implement the Bubble Sort function below
+#1. Loop through your array
+#    - Compare each element to its neighbor
+ #   - If elements in wrong position (relative to each other, swap them)
+#2. If no swaps performed, stop. Else, go back to the element at index 0 and repeat step 1.
 def bubble_sort(arr):
     # Your code here
-
-
+    n = len(arr)#len of arr
+    for i in range(n - 1): #loop thru array except end
+        for j in range(0,n-i-1): #look at every element in array 
+            if arr[j] > arr[j +1]: #if elm index is greater thatn elm index +1(next index elm)
+                arr[j], arr[j+1] = arr[j+1], arr[j] #swap
     return arr
+
 
 
 # STRETCH: implement the Count Sort function below
@@ -29,3 +39,49 @@ def count_sort(arr, maximum=-1):
 
 
     return arr
+
+
+'''
+Insertion sort:
+Conceptualize a sorted half and an unsorted half 
+Initially the sorted half consists of just the first element 
+Iterate along the rest of the array 
+Place it in its appropriate spot in the sorted half 
+The sorted half grows until it encompasses the whole array 
+
+'''
+class Book:
+    def __init__(self, title, author, genre):
+        self.title=title
+        self.author=author
+        self.genre = genre
+
+def insertion_sort_books(arr):
+    #sort by title
+    for i in range(1, len(arr)): #start at 1st mindexed item to have somethin to compare to to be sorted
+        curr_book=arr[i]
+        j = i
+        #put current  book in corect spot in sorted half of arr
+        #loop through sorted half and find right spot
+        while j > 0 and curr_book.title < arr[j-1].title: #compares current element against element before it (j-1 would be element before it)
+            #take book at j-1 and copy it to j spot
+            arr[j] = arr[j-1]
+            j-=1 
+            #insert book at correct position
+        arr[j] = curr_book
+
+    return arr
+
+'''PYTHON SWAP SYNTAX VERSION ^^^
+    def insertion_sort_books(arr):
+        for i in range(1, len(arr)):
+            curr_book = arr[i]
+            j=i
+
+            while j > 0 and curr_book.title < arr[j-1].title:
+                arr[j], arr[j - 1] = arr[j - 1], arr[j]
+                j -= 1
+
+    return arr
+
+'''
